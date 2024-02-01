@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+html {
+    --background-color: #33691e;
+    --gradient-color: #558b2f;
+    --note-bg-color: #ffe36d;
+    --action-bar-color: #ffce00;
+
+    background-color: var(--background-color);
+    background-image:  linear-gradient(var(--gradient-color) 1px, transparent 1px), linear-gradient(90deg, var(--gradient-color) 1px, transparent 1px), linear-gradient(var(--gradient-color) 1px, transparent 1px), linear-gradient(90deg, var(--gradient-color) 1px, var(--background-color) 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+
+    font-family: 'Architects Daughter';
+    color: white;
+    padding: 0.5rem;
+}
+
+h1 {
+    padding: 0.5rem;
+}
+
+.notes-list {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    z-index: 2;
+    padding: 0;
+}
+
+.notes-list li {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-note-button {
+    min-width: 12.5rem;
+    background-color: transparent;
+    color: white;
+    border: 0.2rem dashed #b2b2b2;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: color 0.1s, border 0.1s;
+
+    &:hover {
+        color: white;
+        border-color: white;
+    }
+}
