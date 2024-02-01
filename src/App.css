@@ -13,6 +13,11 @@ html {
 
     font-family: 'Architects Daughter';
     color: white;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
     padding: 0.5rem;
 }
 
@@ -34,6 +39,7 @@ h1 {
 }
 
 .new-note-button {
+    position: absolute;
     min-height: 12.5rem;
     min-width: 12.5rem;
     background-color: transparent;

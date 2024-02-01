@@ -41,9 +41,6 @@ export default function Note(props: NoteProps) {
 
   const DeleteAction = () => (
     <>
-      <button type="button" onClick={() => setEditMode(true)}>
-        Edit
-      </button>
       <button type="button" onClick={handleDelete}>
         Delete
       </button>
@@ -52,7 +49,7 @@ export default function Note(props: NoteProps) {
 
   return (
     <li className="note" {...rest}>
-      <div style={{ flex: 1, padding: '0.5rem' }}>
+      <div style={{ flex: 1, padding: '0.5rem' }} onDoubleClick={() => setEditMode(true)}>
         {editMode 
           ? <textarea value={newText} onChange={(e) => setNewText(e.target.value)} maxLength={100}/>
           : text 

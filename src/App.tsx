@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import Note from './Note'
 import './App.css'
+import Draggable from 'react-draggable'
 
-const initialNotes = [
-  { id: 1, text: 'Get groceries' },
-  { id: 2, text: 'Feed the cat' },
-  { id: 3, text: 'A really really really really really long one'},
+interface Note {
+  id: number,
+  text: string,
+  position?: {x: number, y: number}
+}
+
+const initialNotes: Note[] = [
+  { id: 1, text: 'Get groceries', position: {x: 20, y: 80} },
+  { id: 2, text: 'Feed the cat', position: {x: 360, y: 240} },
 ]
 
 function App() {
@@ -24,29 +30,30 @@ function App() {
     }))
   }
 
-  function newNote() {
+  function newNote(x: number, y: number) {
     const newId = notes[notes.length - 1]?.id + 1 || 1
-    setNotes(prev => [...prev, { id: newId, text: 'New Note' }])
+    setNotes(prev => [...prev, { id: newId, text: 'New Note', position: {x, y} }])
   }
 
   return (
-    <main>
+    <>
+    <main onDoubleClick={(e) => newNote(e.clientX, e.clientY)}>
       <h1>Sticky Notes</h1>
-      <ul className="notes-list">
-        {notes.map((note) => (
+    </main>
+    {notes.map((note) => (
+      <Draggable key={note.id} bounds='main' cancel='.action-bar' defaultPosition={note.position}>
+        <div style={{ position: 'absolute', top: 0, left: 0}}>
           <Note
             noteId={note.id}
             key={note.id}
             text={note.text}
             onDelete={(id: number) => deleteNote(id)}
             onSave={(id: number, newText: string) => saveNote(id, newText)}
-          />)
-        )}
-        <button className="new-note-button" type="button" onClick={newNote}>
-          Add a new note
-        </button>
-      </ul>
-    </main>
+          />
+        </div>
+      </Draggable>
+    ))}
+    </>
   )
 }
 
