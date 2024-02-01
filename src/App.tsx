@@ -10,7 +10,6 @@ const initialNotes = [
 
 function App() {
   const [notes, setNotes] = useState(initialNotes)
-  const [lastId, setLastId] = useState(notes[notes.length - 1].id || 1)
 
   function deleteNote(id: number) {
     setNotes(prev => prev.filter(note => note.id !== id))
@@ -26,8 +25,8 @@ function App() {
   }
 
   function newNote() {
-    setNotes(prev => [...prev, { id: lastId + 1, text: 'New Note' }])
-    setLastId(prev => prev + 1)
+    const newId = notes[notes.length - 1]?.id + 1 || 1
+    setNotes(prev => [...prev, { id: newId, text: 'New Note' }])
   }
 
   return (
