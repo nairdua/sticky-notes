@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Note from './Note'
 import './App.css'
 import Draggable from 'react-draggable'
@@ -10,7 +10,7 @@ interface Note {
 }
 
 const initialNotes: Note[] = [
-  { id: 1, text: 'Get groceries', position: {x: 20, y: 80} },
+  { id: 1, text: 'Get groceries', position: {x: 120, y: 200} },
   { id: 2, text: 'Feed the cat', position: {x: 360, y: 240} },
 ]
 
@@ -35,10 +35,22 @@ function App() {
     setNotes(prev => [...prev, { id: newId, text: 'New Note', position: {x, y} }])
   }
 
+  useEffect(() => {
+    const json = JSON.stringify(notes)
+    localStorage.setItem('notes', json)
+  }, [notes])
+
   return (
     <>
     <main onDoubleClick={(e) => newNote(e.clientX, e.clientY)}>
-      <h1>Sticky Notes</h1>
+      <header>
+        <h1>Sticky Notes</h1>
+        <ul>
+          <li>Double click anywhere on the screen to add a note</li>
+          <li>To edit a note, double click it</li>
+        </ul>
+        <p>2023 - Made by M. Audrian Ananda P. (nairdua)</p>
+      </header>
     </main>
     {notes.map((note) => (
       <Draggable key={note.id} bounds='main' cancel='.action-bar' defaultPosition={note.position}>
